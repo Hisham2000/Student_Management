@@ -86,5 +86,19 @@ input[type="submit"]{
     background-color:#A47E3B;
     color: #FFC18E;
     font-size: 20px;
-    
+    cursor: pointer;
 }
+
+input[type="submit"]:hover{
+    color: aqua;
+    background-color: burlywood; 
+}
+
+a{
+    text-decoration: none;
+    color:#CA955C;
+}
+
+a:visited{
+    color: #CA955C
+} 
