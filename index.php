@@ -16,8 +16,7 @@
     }
     
     if(isset($_GET['search'])){
-        $id = $valid->validationOnInteger($_GET['input']);
-        $result = $db->user($id);
+        $result = $db->search($_GET['input']);
     }
 ?>
 

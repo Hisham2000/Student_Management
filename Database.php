@@ -35,4 +35,10 @@ class Database{
         $query = "Update `student` SET `Name`='".$data['name']."', `Email`='".$data['email']."' WHERE `ID`=".$data['id'];
         $result = mysqli_query($this->conn , $query);
     }
+
+    function search($id){
+        $query="SELECT * FROM `student` WHERE `Name` LIKE '%".$id."%' OR `Email` LIKE '%".$id."%'";
+        $result = mysqli_query($this->conn,$query);
+        return $result;
+    }
 }
