@@ -1,6 +1,11 @@
 <?php
+session_start();
 include "Database.php";
 include "Validation.php";
+if(empty($_SESSION['name'])){
+    header("location: index.php");
+    exit;
+}
 $db = new Database();
 $valid = new Validation();
 $data = mysqli_fetch_assoc($db->user($_GET['id']));

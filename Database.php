@@ -9,6 +9,7 @@ class Database{
     function insert(array $data){
         $query = "INSERT INTO `student`(`Name`, `ID`, `Email`) VALUES ('".$data['name']."', ".$data['id'].", '".$data['email']."');";
         $result = mysqli_query($this->conn , $query);
+        return $result;
     }
 
     function select(){
@@ -40,5 +41,14 @@ class Database{
         $query="SELECT * FROM `student` WHERE `Name` LIKE '%".$id."%' OR `Email` LIKE '%".$id."%'";
         $result = mysqli_query($this->conn,$query);
         return $result;
+    }
+
+    function chick($name, $Password){
+        echo $name ."<br>";
+        echo $Password . "<br>";
+        $query = "SELECT * FROM `admin` WHERE `Name` = '".$name."' AND `Password` = sha1(" .$Password.")";
+        $result = mysqli_query($this->conn, $query);
+        if(!empty($result)) return true;
+        else return false;
     }
 }

@@ -23,4 +23,9 @@ class Validation{
         else return false;
     }
 
+    public function validationOnPassword($pass){
+        if(strlen($pass)>7) return $pass;
+        else return false;
+    }
+
 }

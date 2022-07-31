@@ -72,8 +72,6 @@ thead{
 
 img{
     display: block;
-    position: relative;
-    bottom:50px;
     margin: 0 auto; 
     width: 200px;
     height: 200px;
@@ -92,6 +90,10 @@ input[type="submit"]{
 input[type="submit"]:hover{
     color: aqua;
     background-color: burlywood; 
+}
+
+input[type="file"]{
+    outline: none;
 }
 
 a{
