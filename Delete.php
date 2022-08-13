@@ -1,11 +1,11 @@
 <?php
 session_start();
-include "Database.php";
+include "DbStudent.php";
 if(empty($_SESSION['name'])){
     header("location: index.php");
     exit;
 }
-$db = new Database();
+$db = new DbStudent();
 $check = $db->delete($_GET['id']);
 header("location: index.php");
 exit;

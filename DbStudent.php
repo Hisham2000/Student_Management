@@ -1,5 +1,5 @@
 <?php
-class Database{
+class DbStudent{
     private $conn;
     function __construct()
     {
@@ -7,7 +7,7 @@ class Database{
     }
 
     function insert(array $data){
-        $query = "INSERT INTO `student`(`Name`, `ID`, `Email`) VALUES ('".$data['name']."', ".$data['id'].", '".$data['email']."');";
+        $query = "INSERT INTO `student`(`Name`, `ID`, `Email`,`image`,`Ad_Id`) VALUES ('".$data['name']."', ".$data['id'].", '".$data['email']."',"." '". $data['image']."', ". $data['Ad_id'] .");";
         $result = mysqli_query($this->conn , $query);
         return $result;
     }
@@ -31,9 +31,9 @@ class Database{
         else return 1;
     }
 
-    function update($data)
+    function update($data,$id)
     {
-        $query = "Update `student` SET `Name`='".$data['name']."', `Email`='".$data['email']."' WHERE `ID`=".$data['id'];
+        $query = "Update `student` SET `Name`='".$data['name']."', `Email`='".$data['email']."' WHERE `ID`=".$id;
         $result = mysqli_query($this->conn , $query);
     }
 

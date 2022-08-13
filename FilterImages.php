@@ -26,5 +26,7 @@ class FilterImages{
         move_uploaded_file($this->tmploc, "Upload/Images/".$this->imgName);
     }
 
-    
+    public function getName(){
+        return $this->imgName;
+    }
 }

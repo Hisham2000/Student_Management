@@ -9,20 +9,20 @@ body{
     color: #CA955C;
     font-weight: 700;
 }
- .Parent{
+.Parent{
     display: flex;
- }
- 
- .Form-Parent{
+}
+
+.Form-Parent{
     width: 30%;
     display: flex;
     border : 5px solid;
     border-color: #E2DCC8;
     border-radius: 20px;
     align-items: flex-end
- }
- 
- label{
+}
+
+label{
     display: inline-block;
     width : 15%;
     font-size: 20px;

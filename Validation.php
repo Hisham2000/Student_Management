@@ -11,10 +11,7 @@ class Validation{
     }
 
     public function validationOnText($text){
-        if(!empty($text)){
-            $verfied_text = htmlentities($text);
-            return $verfied_text;
-        }
+        if(!empty($text)) return htmlentities($text);
         else return false;
     }
 
@@ -24,7 +21,7 @@ class Validation{
     }
 
     public function validationOnPassword($pass){
-        if(strlen($pass)>7) return $pass;
+        if(strlen($pass)>7) return md5($pass);
         else return false;
     }
 

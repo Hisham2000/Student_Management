@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "Database.php";
+    include "DbStudent.php";
     include  "Validation.php";
     include "FilterImages.php";
     if(empty($_SESSION['name']))
@@ -8,7 +8,7 @@
         header("location: Login.php");
         exit;
     }
-    $db = new Database();
+    $db = new DbStudent();
     $valid = new Validation();
     $filter = new FilterImages();
     $result = $db->select();
@@ -18,13 +18,13 @@
         $name = $valid->validationOnText($_POST['name']);
         $ID = $valid->validationOnInteger($_POST['id']);
         if($filter->setName($_FILES['img']['name'],$ID)  && $filter->setLocation($_FILES['img']['tmp_name'])){
-            echo "<br>". $filter->getName() ."<br>";
             $filter->save();
-        }
-        if($email && $name && $ID)
-        {
-            $chick = $db->insert($_POST);
-            $result = $db->select();
+            if($email && $name && $ID)
+            {
+                $data = array("name" => $name,"id" => $ID, "email" => $email, "image" => $filter->getName(),"Ad_id"=>$_SESSION['id']);
+                $chick = $db->insert($data);
+                $result = $db->select();
+            }
         }
     }
     
@@ -42,7 +42,7 @@
     </head>
     <body>
         <div class = "Parent">
-
+            
             <div class = "Form-Parent">
 
                 <Form method="POST" enctype="multipart/form-data">
@@ -58,26 +58,28 @@
                         }
                     }
                     ?>
-                    <label>Name</label>
-                    <input name="name" type="text" placeholder = "Enter The Name" >
                     <label>ID</label>
-                    <input name="id" type="text" maxlength = 9 placeholder = "Enter the ID Here" >
+                    <input name="id" type="text" maxlength = 9 placeholder = "Enter the ID Here" required>
+                    <label>Name</label>
+                    <input name="name" type="text" placeholder = "Enter The Name" required>
                     <label>Email</label>
-                    <input name="email" type = "email" placeholder = "Enter the E-Mail" >
+                    <input name="email" type = "email" placeholder = "Enter the E-Mail" required>
                     <label>Picture</label>
-                    <input type="file" name="img">
-                    <input type = "submit" value = "Submit" name= "Submit">
+                    <input type="file" name="img" required>
+                    <input type = "submit" value = "Submit" name= "Submit" >
                 </Form>
                 
             </div>
 
             <div class = "Table-Parent">
                 <div>
+                    <a href="logout.php">LogOut</a>
                     <form method="GET">
                         <label for="search">search</label>
                         <input type="search" id="search" name="input" placeholder="Search &#128270;">
                         <input type="submit" value="search" name="search">
                     </form>
+                    
                 </div>
                 <table>
                     <thead>
@@ -98,7 +100,7 @@
                                 <a href="edit.php?id=<?=$row['ID'];?>">Edit |</a>
                                 <a href="delete.php?id=<?=$row['ID'];?>"> Delete</a>
                             </td>
-                            <td><img src="Upload/Images/<?= $row['ID'];?>.png" width="10px" height="10px"></td>
+                            <td><img src="Upload/Images/<?= $row['image'];?>" width="10px" height="10px"></td>
                         </tr>
                     <?php
                     }
