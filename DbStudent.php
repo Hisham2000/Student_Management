@@ -12,8 +12,8 @@ class DbStudent{
         return $result;
     }
 
-    function select(){
-        $query="SELECT * FROM `student`";
+    function select($id){
+        $query="SELECT * FROM `student` Where Ad_Id = $id";
         $result = mysqli_query($this->conn,$query);
         return $result;
     }
@@ -37,18 +37,16 @@ class DbStudent{
         $result = mysqli_query($this->conn , $query);
     }
 
-    function search($id){
-        $query="SELECT * FROM `student` WHERE `Name` LIKE '%".$id."%' OR `Email` LIKE '%".$id."%'";
+    function search($data, $AD_Id){
+        if(filter_var($data,FILTER_VALIDATE_INT))
+        {
+            $query = "SELECT * FROM `student` WHERE `ID`= $data AND `Ad_Id` = $AD_Id ";
+        }
+        else{
+             $query="SELECT * FROM `student` WHERE  (`Name` LIKE '%".$data."%' OR `Email` LIKE '%".$data."%') And `Ad_ID` = $AD_Id";
+        }
         $result = mysqli_query($this->conn,$query);
         return $result;
-    }
+    } 
 
-    function chick($name, $Password){
-        echo $name ."<br>";
-        echo $Password . "<br>";
-        $query = "SELECT * FROM `admin` WHERE `Name` = '".$name."' AND `Password` = sha1(" .$Password.")";
-        $result = mysqli_query($this->conn, $query);
-        if(!empty($result)) return true;
-        else return false;
-    }
 }

@@ -7,5 +7,6 @@ if(empty($_SESSION['name'])){
 }
 $db = new DbStudent();
 $check = $db->delete($_GET['id']);
+unlink('Upload/Images/'.$_GET['image']);
 header("location: index.php");
 exit;
